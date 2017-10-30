@@ -18,9 +18,13 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 function doAutoban(arg) {
-  var flags = JSON.parse(require("fs").readFileSync("../storage/flags.json"))
+  var flags = JSON.parse(require("fs").readFileSync("./storage/flags.json"))
   flags.autoban = arg;
   fs.writeFileSync("./storage/flags.json", JSON.stringify(flags))
+}
+function getAutoban() {
+  var flags = JSON.parse(require("fs").readFileSync("./storage/flags.json"))
+  return flags.autoban
 }
 // Eval command. Only for Void
 client.on("message", message => {
