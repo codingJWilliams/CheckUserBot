@@ -17,7 +17,11 @@ function clean(text) {
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
-
+function doAutoban(arg) {
+  var flags = JSON.parse(require("fs").readFileSync("../storage/flags.json"))
+  flags.autoban = arg;
+  fs.writeFileSync("./storage/flags.json", JSON.stringify(flags))
+}
 // Eval command. Only for Void
 client.on("message", message => {
   const args = message.content.split(" ").slice(1);
@@ -59,10 +63,14 @@ client.on('guildMemberAdd', member => {
         .send(
           checks.pretty(results, member.user.username + "#" + member.user.discriminator)
         );
-        member.ban({
-          reason: "CheckUser Failed",
-          days: 1
-        })
+        var flags = JSON.parse(require("fs").readFileSync("./storage/flags.json"))
+        if (flags.autoban) {
+          member.ban({
+            reason: "CheckUser Failed",
+            days: 1
+          })
+        }
+        
         // :-)
       }
     } )
