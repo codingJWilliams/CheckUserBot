@@ -39,6 +39,16 @@ client.on("message", message => {
       message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
     }
   }
+  if (message.content.startsWith("cu.silenteval")) {
+    if(message.author.id !== options.ownerID) return;
+    try {
+      let evaled = eval(args.join(" "));
+      if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
+      //message.channel.send(clean(evaled), {code:"xl"});
+    } catch (err) {
+      //message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+    }
+  }
 });
 client.on("guildMemberRemove", member => {
   userLeaveStorage.userLeft(member);
