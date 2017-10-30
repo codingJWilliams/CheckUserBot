@@ -59,6 +59,10 @@ client.on('guildMemberAdd', member => {
         .send(
           checks.pretty(results, member.user.username + "#" + member.user.discriminator)
         );
+        member.ban({
+          reason: "CheckUser Failed",
+          days: 1
+        })
         // :-)
       }
     } )

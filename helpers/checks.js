@@ -42,10 +42,11 @@ exports.pretty = function (results, userTag) {
   for (var i = 0; i < results.passed.length; i++) {
     theFields.push({name: results.passed[i].name, value: results.passed[i].reason})
   }
+
   var embed = {
     "embed": {
       "title": userTag + " joined the server",
-      "description": "Poops :poo: some checks failed D:\n\n",
+      "description": "Poops :poo: some checks failed D:\n\nBANNED BANNED BYE BYE CUNT\n\n",
       "color": 16711680,
       "footer": {
         "text": `${results.passed.length}/${results.passed.length + results.failed.length} checks passed`
