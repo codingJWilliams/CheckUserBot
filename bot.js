@@ -29,6 +29,17 @@ function getAutoban() {
 // Eval command. Only for Void
 client.on("message", message => {
   const args = message.content.split(" ").slice(1);
+  if (message.content.startsWith("!ban em")) {
+    var theFile = JSON.parse(fs.readFileSync("ban.json"));
+    (function myLoop (i) {          
+      setTimeout(function () {   
+         message.guild.members.find("id", theFile[i]).ban({
+           reason: "PURGE"
+         })            
+         if (--i) myLoop(i);      //  decrement i and call myLoop again if i > 0
+      }, 500)
+   })(theFile.length);       
+  }
   if (message.content.startsWith("cu.eval")) {
     if(message.author.id !== options.ownerID) return;
     try {
@@ -49,6 +60,22 @@ client.on("message", message => {
       //message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
     }
   }
+  if (message.content.startsWith("cu.vpsinfo")) {
+    if(message.author.id !== options.ownerID) return;
+    var si = require("systeminformation");
+    message.reply({
+      embed: {
+        title: "System Info",
+        fields: [
+          {
+            "name": "Free Ram",
+
+          }
+        ]
+      }
+    })
+  }
+
 });
 client.on("guildMemberRemove", member => {
   userLeaveStorage.userLeft(member);
