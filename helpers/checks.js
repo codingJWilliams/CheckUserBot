@@ -42,7 +42,7 @@ exports.pretty = function (results, userTag) {
   for (var i = 0; i < results.passed.length; i++) {
     theFields.push({name: results.passed[i].name, value: results.passed[i].reason})
   }
-  var flags = JSON.parse(require("fs").readFileSync("../storage/flags.json"))
+  var flags = JSON.parse(require("fs").readFileSync("./storage/flags.json"))
   var embed = {
     "embed": {
       "title": userTag + " joined the server",
