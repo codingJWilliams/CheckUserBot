@@ -33,9 +33,14 @@ client.on("message", message => {
     var theFile = JSON.parse(fs.readFileSync("ban.json"));
     (function myLoop (i) {          
       setTimeout(function () {   
-         message.guild.members.find("id", theFile[i - 1]).ban({
-           reason: "PURGE"
-         })            
+        try{
+          message.guild.members.find("id", theFile[i - 1]).ban({
+            reason: "PURGE"
+          })    
+        } catch (e) {
+          console.log("N")
+        }
+                 
          if (--i) myLoop(i);      //  decrement i and call myLoop again if i > 0
       }, 500)
    })(theFile.length);       
