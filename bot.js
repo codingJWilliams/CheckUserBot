@@ -77,15 +77,15 @@ client.on("message", message => {
               {
                 "name": "Memory",
                 "value": ` Total memory: ${mInfo.total / 1000000}mb.
-                Free memory: ${mInfo.free / 1000000}mb.
+Free memory: ${mInfo.free / 1000000}mb.
                 `
               },
               {
                 "name": "CPU Info",
-                "value": `Type: ${ cInfo.brand + cInfo.manufacturer + cInfo.model + cInfo.revision + cInfo.family}
-                Cores: ${cInfo.cores}
-                Max Speed: ${cInfo.speedmax}
-                Current speed: ${cInfo.speed}`
+                "value": `Type: ${ cInfo.manufacturer + cInfo.brand + cInfo.model + cInfo.revision}
+Cores: ${cInfo.cores}
+Max Speed: ${cInfo.speedmax}
+Current speed: ${cInfo.speed}`
               }
             ]
           }
