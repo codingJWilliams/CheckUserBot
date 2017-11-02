@@ -46,7 +46,7 @@ exports.pretty = function (results, userTag) {
   var embed = {
     "embed": {
       "title": userTag + " joined the server",
-      "description": "Poops :poo: some checks failed D:\n\n" + flags.autoban ? "BANNED BANNED BYE BYE\n\n": "",
+      "description": "Poops :poo: some checks failed D:\n\n" + ( flags.autoban == true ? "BANNED\n" : ""),
       "color": 16711680,
       "footer": {
         "text": `${results.passed.length}/${results.passed.length + results.failed.length} checks passed`
