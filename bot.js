@@ -76,16 +76,18 @@ client.on('guildMemberAdd', member => {
         var flags = JSON.parse(require("fs").readFileSync("./storage/flags.json"));
         if (!flags.allowNewMembers) {
             member.createDM().then(d => {
-                d.send("An admin has disabled joining this server. Please try again later");
-                d.kick("Joins Disabled");
-                member.guild.channels.find("name", options.logChannelName).send(new Discord.RichEmbed()
-                    .setTitle("Kicked Member")
-                    .setDescription(member.user.username + "#" + member.user.discriminator + " joined while new member joining is disabled D:")
-                    .setThumbnail(member.user.avatarURL)
-                    .addBlankField()
-                    .addField("Was this a mistake?", "Dons can disable this with `nb.flag allowNewMembers yes`")
-                    .setColor(0x42F4EE)
-                )
+                d.send("An admin has disabled joining this server. Please try again later").then(() => {
+                    member.kick("Joins Disabled");
+                    member.guild.channels.find("name", options.logChannelName).send(new Discord.RichEmbed()
+                        .setTitle("Kicked Member")
+                        .setDescription(member.user.username + "#" + member.user.discriminator + " joined while new member joining is disabled D:")
+                        .setThumbnail(member.user.avatarURL)
+                        .addBlankField()
+                        .addField("Was this a mistake?", "Dons can disable this with `nb.flag allowNewMembers yes`")
+                        .setColor(0x42F4EE)
+                    )
+                });
+
             });
             return;
         }
