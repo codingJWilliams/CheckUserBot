@@ -83,7 +83,7 @@ client.on('guildMemberAdd', member => {
                     .setDescription(member.user.username + "#" + member.user.discriminator + " joined while new member joining is disabled D:")
                     .setThumbnail(member.user.avatarURL)
                     .addBlankField()
-                    .addField("Was this a mistake?", "Dons can disable this with `nb.flag allowNewMembers yes`");
+                    .addField("Was this a mistake?", "Dons can disable this with `nb.flag allowNewMembers yes`")
                     .setColor(0x42F4EE)
                 )
             });
