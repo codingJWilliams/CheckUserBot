@@ -1,3 +1,4 @@
 {
-  "autoban": false
+    "autoban": false,
+    "allowNewMembers": false
 }
