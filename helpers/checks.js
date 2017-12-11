@@ -1,6 +1,7 @@
 // Import checks
 var checks = [
   require("../checks/dbl").check,
+  require("../checks/softban").check,
   require("../checks/age").check,
   require("../checks/previouslyJoined").check
 ];
@@ -13,12 +14,16 @@ exports.check = function(member) {
     }
     Promise.all(promiseMeNoPromises).then((results) => {
       console.log(results)
+      var kik = false;
+      results.map(r => r.kick ? kik = true : null);
+      console.log(kik)
       var failedResults = results.filter(result => { return !result.pass });
       var succeededResults = results.filter(result => { return result.pass });
-      if (failedResults.length > 0) {
+      if (failedResults.length > 0 || kik) {
         // We have some failed results
         resolve({
           pass: false,
+          kick: kik,
           failed: failedResults,
           passed: succeededResults
         })
@@ -46,7 +51,7 @@ exports.pretty = function (results, userTag) {
   var embed = {
     "embed": {
       "title": userTag + " joined the server",
-      "description": "Poops :poo: some checks failed D:\n\n" + ( flags.autoban == true ? "BANNED\n" : ""),
+      "description": "Poops :poo: some checks failed D:\n\n" + ( flags.autoban || results.kick ? "Kicked\n" : ""),
       "color": 16711680,
       "footer": {
         "text": `${results.passed.length}/${results.passed.length + results.failed.length} checks passed`
