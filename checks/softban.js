@@ -8,7 +8,8 @@ var moment = require("moment");
 
 exports.check = function (member) {
   return new Promise(function (resolve, reject) {
-    var passes = require("../ban.json").includes(member.id);
+    var passes = require("../ban.json").indexOf(member.id) === -1;
+    Array.prototype.in
     if (passes) {
       resolve({
         pass: true,
