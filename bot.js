@@ -92,6 +92,21 @@ client.on('guildMemberAdd', member => {
             return;
         }
         checks.check(member).then(results => {
+            if (results.kick) {
+                member.createDM().then(d => {
+                    d.send({embed: { title: "You are softbanned from nightborn", description: "You were involved in a mass raid. If this is a mistake please contact @VoidCrafted#2483", color: 0xFFFF00 }}).then(() => {
+                        member.kick("Raid");
+                        member.guild.channels.find("name", options.logChannelName).send(new Discord.RichEmbed()
+                            .setTitle("Kicked Member")
+                            .setDescription(member.user.username + "#" + member.user.discriminator + " was involved in a nightborn raid and has been thusly kicked.")
+                            .setThumbnail(member.user.avatarURL)
+                            .setColor(0x42F4EE)
+                        )
+                    });
+    
+                });
+                return;
+            }
             if (results.pass) {
                 // If user has passed test, send a positive message
                 member.guild.channels.find("name", options.logChannelName).send({
