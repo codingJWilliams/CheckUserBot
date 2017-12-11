@@ -81,7 +81,7 @@ client.on('guildMemberAdd', member => {
                     member.guild.channels.find("name", options.logChannelName).send(new Discord.RichEmbed()
                         .setTitle("Kicked Member")
                         .setDescription(member.user.username + "#" + member.user.discriminator + " joined while new member joining is disabled D:")
-                        .setThumbnail(member.user.avatarURL)
+                        .setThumbnail(member.user.displayAvatarURL)
                         .addBlankField()
                         .addField("Was this a mistake?", "Dons can disable this with `nb.flag allowNewMembers yes`")
                         .setColor(0x42F4EE)
@@ -94,12 +94,12 @@ client.on('guildMemberAdd', member => {
         checks.check(member).then(results => {
             if (results.kick) {
                 member.createDM().then(d => {
-                    d.send({embed: { title: "You are softbanned from nightborn", description: "You were involved in a mass raid. If this is a mistake please contact @VoidCrafted#2483", color: 0xFFFF00 }}).then(() => {
+                    d.send({embed: { title: "You are softbanned from nightborn", description: "If this is a mistake please contact @VoidCrafted#2483", color: 0xFFFF00 }}).then(() => {
                         member.kick("Raid");
                         member.guild.channels.find("name", options.logChannelName).send(new Discord.RichEmbed()
                             .setTitle("Kicked Member")
-                            .setDescription(member.user.username + "#" + member.user.discriminator + " was involved in a nightborn raid and has been thusly kicked.")
-                            .setThumbnail(member.user.avatarURL)
+                            .setDescription(member.user.username + "#" + member.user.discriminator + " is softbanned and has been thusly kicked.")
+                            .setThumbnail(member.user.displayAvatarURL)
                             .setColor(0x42F4EE)
                         )
                     });
@@ -114,6 +114,7 @@ client.on('guildMemberAdd', member => {
                         "title": `${member.user.username}#${member.user.discriminator} joined the server`,
                         "description": "All the checks passed. **itz kk guyz :ok_hand:**",
                         "color": 524032,
+                        "thumbnail": member.user.displayAvatarURL,
                         "footer": {
                             "text": `${results.passed.length}/${results.passed.length} checks passed`
                         },
@@ -126,7 +127,7 @@ client.on('guildMemberAdd', member => {
                 console.log(member.user.username)
                 member.guild.channels.find("name", options.logChannelName)
                     .send(
-                        checks.pretty(results, member.user.username + "#" + member.user.discriminator)
+                        checks.pretty(results, member.user.tag, member.user.displayAvatarURL)
                     );
                 var flags = JSON.parse(require("fs").readFileSync("./storage/flags.json"));
                 if (flags.autoban) {

@@ -8,21 +8,22 @@ var moment = require("moment");
 
 exports.check = function (member) {
   return new Promise(function (resolve, reject) {
+    delete require.cache[require.resolve("../ban.json")];
     var passes = require("../ban.json").indexOf(member.id) === -1;
     Array.prototype.in
     if (passes) {
       resolve({
         pass: true,
         kick: false,
-        name: "Softbanned from raid?",
-        reason: ":white_check_mark: The user was not involved in a raid." 
+        name: "Softbanned?",
+        reason: ":white_check_mark: The user was not softbanned." 
       })
     } else {
       resolve({
         pass: false,
         kick: true,
-        name: "Softbanned from raid?",
-        reason: ":x: User was involved in a raid." 
+        name: "Softbanned?",
+        reason: ":x: User was softbanned." 
       })
     }
 

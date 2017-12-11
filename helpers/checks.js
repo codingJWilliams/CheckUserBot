@@ -39,7 +39,7 @@ exports.check = function(member) {
   })
 }
 // Function to build pretty embed
-exports.pretty = function (results, userTag) {
+exports.pretty = function (results, userTag, th) {
   var theFields = [];
   for (var i = 0; i < results.failed.length; i++) {
     theFields.push({name: results.failed[i].name, value: results.failed[i].reason})
@@ -56,6 +56,7 @@ exports.pretty = function (results, userTag) {
       "footer": {
         "text": `${results.passed.length}/${results.passed.length + results.failed.length} checks passed`
       },
+      "thumbnail": th,
       "author": {
         "name": "New Member"
       },
