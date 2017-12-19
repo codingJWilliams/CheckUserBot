@@ -172,11 +172,11 @@ client.on("messageReactionAdd", async(messageReaction, user) => {
   var labBunnyRole = "392736357715542017";
   var optoutRole = "392736650498932739";
   if (messageReaction.emoji.name === "🚨") {
-    var member = await this.client.guilds.get("300155035558346752")
+    var member = await client.guilds.get("300155035558346752")
       .fetchMember(user);
     await member.addRole(labBunnyRole)
   } else if (messageReaction.emoji.name === "⛔") {
-    var member = await this.client.guilds.get("300155035558346752")
+    var member = await client.guilds.get("300155035558346752")
       .fetchMember(user);
     await member.addRole(optoutRole)
   }
@@ -193,11 +193,11 @@ client.on("messageReactionRemove", async(messageReaction, user) => {
   var labBunnyRole = "392736357715542017";
   var optoutRole = "392736650498932739";
   if (messageReaction.emoji.name === "🚨") {
-    var member = await this.client.guilds.get("300155035558346752")
+    var member = await client.guilds.get("300155035558346752")
       .fetchMember(user);
     await member.removeRole(labBunnyRole)
   } else if (messageReaction.emoji.name === "⛔") {
-    var member = await this.client.guilds.get("300155035558346752")
+    var member = await client.guilds.get("300155035558346752")
       .fetchMember(user);
     await member.removeRole(optoutRole)
   }
