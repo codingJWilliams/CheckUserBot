@@ -97,7 +97,6 @@ client.on('guildMemberAdd', member => {
                 .send(new Discord.RichEmbed()
                   .setTitle("Kicked Member")
                   .setDescription(member.user.username + "#" + member.user.discriminator + " joined while new member joining is disabled D:")
-                  .setThumbnail(member.user.displayAvatarURL)
                   .addBlankField()
                   .addField("Was this a mistake?", "Dons can disable this with `nb.flag allowNewMembers yes`")
                   .setColor(0x42F4EE))
@@ -123,7 +122,6 @@ client.on('guildMemberAdd', member => {
                     .send(new Discord.RichEmbed()
                       .setTitle("Kicked Member")
                       .setDescription(member.user.username + "#" + member.user.discriminator + " is softbanned and has been thusly kicked.")
-                      .setThumbnail(member.user.displayAvatarURL)
                       .setColor(0x42F4EE))
                 });
             });
@@ -137,7 +135,6 @@ client.on('guildMemberAdd', member => {
                 "title": `${member.user.username}#${member.user.discriminator} joined the server`,
                 "description": "All the checks passed. **itz kk guyz :ok_hand:**",
                 "color": 524032,
-                "thumbnail": member.user.displayAvatarURL,
                 "footer": {
                   "text": `${results.passed.length}/${results.passed.length} checks passed`
                 },
