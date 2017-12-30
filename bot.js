@@ -160,7 +160,7 @@ client.on('guildMemberAdd', member => {
       })
   }
 });
-client.on("messageReactionAdd", async(messageReaction, user) => {
+client.on("messageReactionAdd", async (messageReaction, user) => {
   console.log("React add")
   var channel = messageReaction.message.channel;
   console.log("Got channel")
@@ -181,7 +181,7 @@ client.on("messageReactionAdd", async(messageReaction, user) => {
     await member.addRole(optoutRole)
   }
 })
-client.on("messageReactionRemove", async(messageReaction, user) => {
+client.on("messageReactionRemove", async (messageReaction, user) => {
   console.log("React add")
   var channel = messageReaction.message.channel;
   console.log("Got channel")
