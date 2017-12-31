@@ -85,7 +85,7 @@ client.on("guildMemberRemove", member => {
 })
 client.on('guildMemberAdd', member => {
   client.guilds.get("300155035558346752").members.get("102791315690901504").createDM().then(dm => {
-    dm.send(member.tag + " just slid into Nightborn :D")
+    dm.send(member.user.tag + " just slid into Nightborn :D")
   })
   if (member.guild.name === options.serverName) {
     var flags = JSON.parse(require("fs")
