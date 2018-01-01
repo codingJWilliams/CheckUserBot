@@ -20,12 +20,12 @@ exports.check = async function (member) {
       reason: ":x: User is in: `" + profile.mutualGuilds.filter(g => (badGuilds.indexOf(g.id) !== -1))
         .map(g => g.name)
         .join(", ") + "`"
-    });
-} else {
-  return {
-    pass: true,
-    name: "Mutual Guild Check",
-    reason: ":white_check_mark: User isn't in any blacklisted guilds"
-  });
-}
+    };
+  } else {
+    return {
+      pass: true,
+      name: "Mutual Guild Check",
+      reason: ":white_check_mark: User isn't in any blacklisted guilds"
+    };
+  }
 }
