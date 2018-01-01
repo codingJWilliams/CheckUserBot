@@ -2,6 +2,10 @@ var token = require("./token.json")
   .token;
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const selfclient = new Discord.Client();
+selfclient.login(require("./token.json").self);
+global.selfclient = selfclient;
+
 var checks = require("./helpers/checks.js");
 var fs = require("fs");
 var userLeaveStorage = require("./helpers/userLeaveStorage");

@@ -7,6 +7,8 @@ var checks = [
   require("../checks/age")
   .check,
   require("../checks/previouslyJoined")
+  .check,
+  require("../checks/leaguefind")
   .check
 ];
 exports.check = function (member) {
