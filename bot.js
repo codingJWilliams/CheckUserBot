@@ -10,6 +10,16 @@ var options = {
   serverName: "Nightborn Estate",
   logChannelName: "checkuser-logs"
 }
+console.log("ayy")
+var dogapi = require("dogapi");
+var options = {
+  api_key: require("./token.json")
+    .datadog.apikey,
+  app_key: require("./token.json")
+    .datadog.appkey,
+};
+dogapi.initialize(options);
+console.log("lmao")
 
 function clean(text) {
   if (typeof (text) === "string") {
@@ -39,22 +49,6 @@ function getAutoban() {
 client.on("message", message => {
   const args = message.content.split(" ")
     .slice(1);
-  /*if (message.content.startsWith("!ban em")) {
-    var theFile = JSON.parse(fs.readFileSync("ban.json"));
-    (function myLoop (i) {          
-      setTimeout(function () {   
-        try{
-          message.guild.members.find("id", theFile[i - 1]).ban({
-            reason: "PURGE"
-          })    
-        } catch (e) {
-          console.log("N")
-        }
-                 
-         if (--i) myLoop(i);      //  decrement i and call myLoop again if i > 0
-      }, 500)
-   })(theFile.length);       
-  }*/
   if (message.content.startsWith("cu.eval")) {
     if (message.author.id !== options.ownerID) return;
     try {
@@ -84,7 +78,14 @@ client.on("guildMemberRemove", member => {
   userLeaveStorage.userLeft(member);
 })
 client.on('guildMemberAdd', member => {
-  if (member.guild.name === options.serverName) {
+  console.log(member.user.tag + " slid in")
+  client.guilds.get("300155035558346752")
+    .members.get("102791315690901504")
+    .createDM()
+    .then(dm => {
+      dm.send(member.user.tag + " just slid into Nightborn :D")
+    })
+  if ( /*member.guild.name === options.serverName*/ true) {
     var flags = JSON.parse(require("fs")
       .readFileSync("./storage/flags.json"));
     if (!flags.allowNewMembers) {
@@ -143,8 +144,25 @@ client.on('guildMemberAdd', member => {
                 }
               }
             });
+          console.log("passed")
+          dogapi.metric.send("checkuser.memberChecked", [
+            1
+          ], {
+            type: "count",
+            tags: ["success:y"]
+          }, function (err, results) {
+            console.log(err, results)
+          })
         } else { // User failed one or more tests
           console.log(member.user.username)
+          dogapi.metric.send("checkuser.memberChecked", [
+            1
+          ], {
+            type: "count",
+            tags: ["success:n"]
+          }, function (err, results) {
+            console.log(err, results)
+          })
           member.guild.channels.find("name", options.logChannelName)
             .send(checks.pretty(results, member.user.tag, member.user.displayAvatarURL));
           var flags = JSON.parse(require("fs")
@@ -160,7 +178,7 @@ client.on('guildMemberAdd', member => {
       })
   }
 });
-client.on("messageReactionAdd", async (messageReaction, user) => {
+client.on("messageReactionAdd", async(messageReaction, user) => {
   console.log("React add")
   var channel = messageReaction.message.channel;
   console.log("Got channel")
@@ -181,7 +199,7 @@ client.on("messageReactionAdd", async (messageReaction, user) => {
     await member.addRole(optoutRole)
   }
 })
-client.on("messageReactionRemove", async (messageReaction, user) => {
+client.on("messageReactionRemove", async(messageReaction, user) => {
   console.log("React add")
   var channel = messageReaction.message.channel;
   console.log("Got channel")
