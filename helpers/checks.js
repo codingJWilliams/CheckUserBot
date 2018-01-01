@@ -10,6 +10,7 @@ var checks = [
   .check
 ];
 exports.check = function (member) {
+  console.log(member.user.tag +" getting checkd")
   return new Promise((resolve, reject) => {
     var promiseMeNoPromises = [];
     for (var i = 0; i < checks.length; i++) {
