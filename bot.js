@@ -10,6 +10,7 @@ var options = {
   serverName: "Nightborn Estate",
   logChannelName: "checkuser-logs"
 }
+console.log("ayy")
 var dogapi = require("dogapi");
 var options = {
   api_key: require("./token.json")
@@ -18,7 +19,7 @@ var options = {
     .datadog.appkey,
 };
 dogapi.initialize(options);
-global.dogapi = dogapi;
+console.log("lmao")
 
 function clean(text) {
   if (typeof (text) === "string") {
