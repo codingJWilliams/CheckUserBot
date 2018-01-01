@@ -9,16 +9,17 @@ var options = {
   ownerID: "193053876692189184",
   serverName: "Nightborn Estate",
   logChannelName: "checkuser-logs"
-}
+};
+
 console.log("ayy")
 var dogapi = require("dogapi");
-var options = {
+var options2 = {
   api_key: require("./token.json")
     .datadog.apikey,
   app_key: require("./token.json")
     .datadog.appkey,
 };
-dogapi.initialize(options);
+dogapi.initialize(options2);
 console.log("lmao")
 
 function clean(text) {
