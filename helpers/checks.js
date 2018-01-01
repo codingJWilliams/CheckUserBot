@@ -71,7 +71,6 @@ exports.pretty = function (results, userTag, th) {
       "footer": {
         "text": `${results.passed.length}/${results.passed.length + results.failed.length} checks passed`
       },
-      "thumbnail": th,
       "author": {
         "name": "New Member"
       },
