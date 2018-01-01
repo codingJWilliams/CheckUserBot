@@ -10,6 +10,13 @@ var options = {
   serverName: "Nightborn Estate",
   logChannelName: "checkuser-logs"
 }
+var dogapi = require("dogapi");
+var options = {
+  api_key: require("./token.json").datadog.apikey,
+  app_key: require("./token.json").datadog.appkey,
+};
+dogapi.initialize(options);
+global.dogapi = dogapi;
 
 function clean(text) {
   if (typeof (text) === "string") {
@@ -146,8 +153,24 @@ client.on('guildMemberAdd', member => {
                 }
               }
             });
+          dogapi.metric.send("checkuser.memberChecked", [
+            1
+          ], {
+            type: "count",
+            tags: ["success:y"]
+          }, function (err, results) {
+            //
+          })
         } else { // User failed one or more tests
           console.log(member.user.username)
+          dogapi.metric.send("checkuser.memberChecked", [
+            1
+          ], {
+            type: "count",
+            tags: ["success:n"]
+          }, function (err, results) {
+            //
+          })
           member.guild.channels.find("name", options.logChannelName)
             .send(checks.pretty(results, member.user.tag, member.user.displayAvatarURL));
           var flags = JSON.parse(require("fs")

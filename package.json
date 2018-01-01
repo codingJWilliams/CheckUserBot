@@ -9,6 +9,7 @@
   "author": "Jay Williams",
   "license": "ISC",
   "dependencies": {
+    "datadog": "^1.0.1",
     "discord.js": "^11.2.1",
     "moment": "^2.19.1",
     "request": "^2.83.0"
