@@ -159,7 +159,7 @@ client.on('guildMemberAdd', member => {
             type: "count",
             tags: ["success:y"]
           }, function (err, results) {
-            //
+            console.log(err, results)
           })
         } else { // User failed one or more tests
           console.log(member.user.username)
@@ -169,7 +169,7 @@ client.on('guildMemberAdd', member => {
             type: "count",
             tags: ["success:n"]
           }, function (err, results) {
-            //
+            console.log(err, results)
           })
           member.guild.channels.find("name", options.logChannelName)
             .send(checks.pretty(results, member.user.tag, member.user.displayAvatarURL));
