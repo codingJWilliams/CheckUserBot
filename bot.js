@@ -1,3 +1,4 @@
+const version = 2;
 var token = require("./token.json")
     .token;
 const Discord = require("discord.js");
@@ -62,6 +63,10 @@ client.on("message", message => {
         } catch (err) {
             message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
         }
+    }
+    if (message.content.startsWith("cu.ping")) {
+        if (message.author.id !== options.ownerID) return;
+        message.channel.send(new Discord.RichEmbed().setColor(0xFFFF00).setTitle("o/ I'm alive").setDescription("I made it over the _w_a_v_e_s_ :pensive:").setFooter("Version " + v))
     }
     if (message.content.startsWith("cu.silenteval")) {
         if (message.author.id !== options.ownerID) return;
