@@ -1,4 +1,4 @@
-const version = 2;
+const v = 2;
 var token = require("./token.json")
     .token;
 const Discord = require("discord.js");
